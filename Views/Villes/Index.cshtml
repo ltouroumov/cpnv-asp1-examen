@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ASP1Examen.Models.Ville>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using(Html.BeginForm("BatchDelete", "Villes")) {
+    var grid = new WebGrid(Model, defaultSort: "Npa");
+    
+    <div>
+    @grid.GetHtml(
+        columns: grid.Columns(
+            grid.Column("", "", item => Html.CheckBox("Batch", false, new { Value = item.Id })),
+            grid.Column("Npa", "Npa"),
+            grid.Column("City", "City"),
+            grid.Column("", "", itm => Html.ActionLink("Edit", "Edit", new { id=itm.Id })),
+            grid.Column("", "", itm => Html.ActionLink("Details", "Details", new { id=itm.Id })),
+            grid.Column("", "", itm => Html.ActionLink("Delete", "Delete", new { id=itm.Id }))
+        )
+    )
+    </div>
+    <input type="submit" value="Delete" />
+}

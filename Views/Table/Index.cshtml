@@ -1,0 +1,41 @@
+﻿@using ASP1Examen.Models
+@model TableGeneratorOptions
+@{
+    ViewBag.Title = "Table Generator";
+}
+
+<style type="text/css">
+    #DoomTable {
+        border-collapse: collapse;
+    }
+        #DoomTable td {
+            border: 1px solid black;
+            text-align: right;
+        }
+</style>
+
+<h2>Table Generator</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <label>Rows</label> @Html.TextBox("Rows")<br />
+        <label>Cols</label> @Html.TextBox("Cols")<br />
+        <input type="submit" value="Make Table" />
+    </div>
+}
+
+@if (Model.Generate) {
+    var n = 1;
+    <table id="DoomTable">
+    @for (int x = 0; x < Model.Rows; x++)
+    {
+        <tr>
+        @for (int y = 0; y < Model.Cols; y++)
+        {
+            <td>@(n++)</td>
+        }
+        </tr>
+    }
+    </table>
+}
